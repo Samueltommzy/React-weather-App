@@ -1,24 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import {LocationSearch} from './Components/LocationSearch';
+import {LocationTable} from './Components/LocationTable';
 function App() {
+  const [locationList,setLocationList] = useState<string[]>([]);
+  const addLoc = (loc:string) =>{
+    setLocationList([...locationList,loc]);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className = 'container'>
+      <h1>Weather Application</h1>
+      <LocationSearch handleSearch = {addLoc}/>
+      <LocationTable Locations = {locationList}/>
     </div>
   );
 }
