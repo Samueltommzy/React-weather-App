@@ -18,7 +18,7 @@ export const LocationSearch: FC<LocationSearchProp> = ({handleSearch}) => {
           Add a location
           <input className = 'ml-1 mr-1' type = 'text' value = {location} onChange ={(e:any)=>setLocation(e.target.value)}/>
         </label>
-        <button className = 'btn btn-primary' onClick = {updateLocations} disabled = {disableSearch}>Search for location</button>
+        <button className = 'btn btn-primary' onClick = {updateLocations} disabled = {disableSearch}>Search</button>
     </div>
   )
 }
