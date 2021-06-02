@@ -28,6 +28,16 @@ export async function readWeatherData(locId:number): Promise<Weather|null> {
   }
 }
 
+export async function readWeatherForecast(locId:number):Promise<Weather[]|null>{
+  const res = await fetch(`${apiUrl}/forecast?id=${locId}&appId=${apiKey}&units=metric&cnt=8`);
+  switch(res.status){
+    case 200:
+      return (await res.json()).list;
+    default:
+      return null;
+  }
+}
+
 export function getIconUrl(iconId:string):string{
   return `http://openweathermap.org/img/wn/${iconId}.png`;
 }

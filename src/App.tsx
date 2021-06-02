@@ -1,12 +1,13 @@
 import React, {useState,useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './Styles/WeatherSummary.css';
 import {LocationSearch} from './Components/LocationSearch';
 import {LocationTable} from './Components/LocationTable';
 import {weatherLoc} from './Models/WeatherLocation';
 import {searchLocation} from './Services/WeatherService';
-import {WeatherEntry} from './Components/WeatherEntry';
-import {readWeatherData,getIconUrl} from './Services/WeatherService';
+import {WeatherSummaryProps} from './Components/WeatherSummary';
+import {readWeatherData,readWeatherForecast} from './Services/WeatherService';
 import {Weather} from './Models/Weather';
 
 function App() {
@@ -15,12 +16,15 @@ function App() {
   const [warning,setWarning] = useState('');
   const [currLocation,setCurrLocation] = useState<weatherLoc|undefined>(undefined);
   const [weatherEntry,setWeatherEntry] = useState<Weather|null>(null);
-  
+  const [weatherForecast,setWeatherForcast] = useState<Weather[]|null>(null);
   useEffect(() => {
     if(currLocation){
       readWeatherData(currLocation.id).then((res)=>{
         setWeatherEntry(res);
-      })
+      });
+      readWeatherForecast(currLocation.id).then((res)=>{
+        setWeatherForcast(res);
+      });
     }
   }, [currLocation]);
 
@@ -52,7 +56,7 @@ function App() {
         : null
       }
       <LocationTable Locations = {locationList} currentLocation = {currLocation} onSelect = {(location)=>setCurrLocation(location)}/>
-      <WeatherEntry weather = {weatherEntry}/>
+      <WeatherSummaryProps weather = {weatherEntry} forecast = {weatherForecast} location = {currLocation}/>
     </div>
   );
 }
