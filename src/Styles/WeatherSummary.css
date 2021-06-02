@@ -1,0 +1,14 @@
+ol{
+  overflow: auto; 
+}
+li{
+  display: inline-block;
+  border-right: 1px solid black;
+  list-style-type: none;
+  padding: 10px;
+  font-size: 10px;
+}
+li:hover{
+  background: lightgray;
+  cursor: pointer;
+}
