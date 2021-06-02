@@ -9,9 +9,10 @@ export const WeatherEntry:FC<weatherProps> = ({weather}) => {
   if(!weather){
     return null;
   }
+  
   return (
     <div>
-      {new Date(weather.dt *1000).toDateString()}
+      {new Date(weather.dt *1000).toTimeString()}
       <div>
       <strong>{weather.main.temp}°C</strong>
       <div>({weather.main.temp_min}°C/{weather.main.temp_max}°C)</div>
