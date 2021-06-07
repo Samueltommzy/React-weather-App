@@ -9,8 +9,23 @@ import {searchLocation} from './Services/WeatherService';
 import {WeatherSummaryProps} from './Components/WeatherSummary';
 import {readWeatherData,readWeatherForecast} from './Services/WeatherService';
 import {Weather} from './Models/Weather';
-
+import { createMuiTheme, Grid, makeStyles, Paper, ThemeProvider} from '@material-ui/core';
+import bkgroundImg from './weather.jpg';
+import {Navbar} from './Components/Navbar';
+import { lightBlue, teal } from '@material-ui/core/colors';
+const useStyles  = makeStyles({
+  root:{
+    backgroundImage: `url(${bkgroundImg})`,
+    minHeight: '100vh'
+  }
+});
+const theme = createMuiTheme({
+  palette :{
+    primary: lightBlue
+  }
+})
 function App() {
+  const classes = useStyles();
   const [locationList,setLocationList] = useState<weatherLoc[]>([]);
   const [error,setError] = useState('');
   const [warning,setWarning] = useState('');
@@ -38,26 +53,41 @@ function App() {
     else if(locationList.find(loc=>loc.id === locationData.id)){
       setWarning(`This location data already exists`);
     }
+    else if(locationList.length >= 4){
+      setWarning('You can only have a maximum of 4 Locations');
+    }
     else{
       setLocationList([...locationList,locationData]);
     } 
   }
 
   return (
-    <div className = 'container'>
-      <h1>Weather Application</h1>
-      <LocationSearch handleSearch = {addLoc}/>
-      {
-        error? <div className = {`alert alert-danger`}>{error}</div>
-        : null
-      }
-      {
-        warning ? <div className = {`alert alert-warning`}>{warning}</div>
-        : null
-      }
-      <LocationTable Locations = {locationList} currentLocation = {currLocation} onSelect = {(location)=>setCurrLocation(location)}/>
-      <WeatherSummaryProps weather = {weatherEntry} forecast = {weatherForecast} location = {currLocation}/>
-    </div>
+    <ThemeProvider theme = {theme}>
+       <Paper className = {classes.root}>
+      <Grid direction = 'column' container>
+        <Grid item>
+          <Navbar/>
+        </Grid> 
+        <Grid item container> 
+          <Grid item sm = {2}/>
+          <Grid item sm = {6}>
+            <LocationSearch handleSearch = {addLoc}/>
+              {
+                error? <div className = {`alert alert-danger`}>{error}</div>
+                : null
+              }
+              {
+                warning ? <div className = {`alert alert-warning`}>{warning}</div>
+                : null
+              }
+           <LocationTable Locations = {locationList} currentLocation = {currLocation} onSelect = {(location)=>setCurrLocation(location)}/>
+           <WeatherSummaryProps weather = {weatherEntry} forecast = {weatherForecast} location = {currLocation}/>
+          </Grid>
+          <Grid item sm = {4}/>
+        </Grid>
+      </Grid>
+    </Paper>
+    </ThemeProvider>  
   );
 }
 
