@@ -9,7 +9,7 @@ console.log(apiKey)
 // }
 
 export async function searchLocation(loc:string):Promise<weatherLoc|undefined> {
-  const res = await fetch(`${apiUrl}/weather?q=${loc}&appId=${apiKey}`);
+  const res = await fetch(`${apiUrl}/weather?q=${loc}&appId=${apiKey}&units=metric`);
   switch(res.status) {
     case 200:
       return await res.json();
