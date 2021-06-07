@@ -1,10 +1,19 @@
+import { Button, Grid, makeStyles, TextField } from '@material-ui/core';
+import { AccountCircleOutlined,LocationOn } from '@material-ui/icons';
 import React,{FC,useState,} from 'react'
 
 interface LocationSearchProp {
   handleSearch : (val:string) => void;
 }
-export const LocationSearch: FC<LocationSearchProp> = ({handleSearch}) => {
 
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
+
+export const LocationSearch: FC<LocationSearchProp> = ({handleSearch}) => {
+  const classes = useStyles();
   const [location,setLocation] = useState('');
   const disableSearch = location.trim() === '';
 
@@ -14,11 +23,28 @@ export const LocationSearch: FC<LocationSearchProp> = ({handleSearch}) => {
   }
   return (
     <div>
-      <label>
-          Add a location
-          <input className = 'ml-1 mr-1' type = 'text' value = {location} onChange ={(e:any)=>setLocation(e.target.value)}/>
-        </label>
-        <button className = 'btn btn-primary' onClick = {updateLocations} disabled = {disableSearch}>Search</button>
+        <div className={classes.margin}>
+        <Grid container spacing={1} alignItems="flex-end">
+          <Grid item>
+            <LocationOn />
+          </Grid>
+          <Grid item>
+            <TextField 
+              id="input-with-icon-grid" 
+              label="Location"
+              value = {location} onChange ={(e:any)=>setLocation(e.target.value)}
+            />
+          </Grid>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            disabled = {disableSearch}
+            onClick = {updateLocations}
+          >
+            Add
+          </Button>
+        </Grid>
+      </div>
     </div>
   )
 }
