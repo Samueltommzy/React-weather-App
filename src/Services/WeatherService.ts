@@ -19,7 +19,7 @@ export async function searchLocation(loc:string):Promise<weatherLoc|undefined> {
 }
 
 export async function readWeatherData(locId:number): Promise<Weather|null> {
-  const res = await fetch(`${apiUrl}/weather?id=${locId}&appId=${apiKey}&units=metric`)
+  const res = await fetch(`${apiUrl}/weather?id=${locId}&appId=${apiKey}&units=metric`);
   switch(res.status){
     case 200:
       return res.json();

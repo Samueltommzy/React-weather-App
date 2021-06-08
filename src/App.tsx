@@ -16,7 +16,10 @@ import { lightBlue, teal } from '@material-ui/core/colors';
 const useStyles  = makeStyles({
   root:{
     backgroundImage: `url(${bkgroundImg})`,
-    minHeight: '100vh'
+    minHeight: '50vh'
+  },
+  summary:{
+    // backgroundColor:lightBlue[500]
   }
 });
 const theme = createMuiTheme({
@@ -63,12 +66,12 @@ function App() {
 
   return (
     <ThemeProvider theme = {theme}>
-       <Paper className = {classes.root}>
+       <Paper >
       <Grid direction = 'column' container>
         <Grid item>
           <Navbar/>
         </Grid> 
-        <Grid item container> 
+        <Grid item container className = {classes.root}> 
           <Grid item sm = {2}/>
           <Grid item sm = {6}>
             <LocationSearch handleSearch = {addLoc}/>
@@ -81,9 +84,15 @@ function App() {
                 : null
               }
            <LocationTable Locations = {locationList} currentLocation = {currLocation} onSelect = {(location)=>setCurrLocation(location)}/>
-           <WeatherSummaryProps weather = {weatherEntry} forecast = {weatherForecast} location = {currLocation}/>
           </Grid>
           <Grid item sm = {4}/>
+        </Grid>
+        <Grid item container className = {classes.summary}>
+          <Grid item sm = {2} />
+          <Grid item sm = {8}>
+            <WeatherSummaryProps weather = {weatherEntry} forecast = {weatherForecast} location = {currLocation}/>
+          </Grid>
+          <Grid item sm = {2}/>
         </Grid>
       </Grid>
     </Paper>

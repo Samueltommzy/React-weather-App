@@ -1,4 +1,5 @@
-import { Avatar, Card, CardContent, CardHeader, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Card, CardContent, CardHeader, Grid, makeStyles, Typography } from '@material-ui/core';
+import { grey, lightBlue, red } from '@material-ui/core/colors';
 import React, { FC } from 'react'
 import {Weather} from '../Models/Weather';
 import {getIconUrl} from '../Services/WeatherService';
@@ -25,6 +26,12 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
+  avatar: {
+    backgroundColor: grey[500],
+  },
+  card : {
+    backgroundColor : lightBlue[500]
+  }
 }));
 export const WeatherEntry:FC<weatherProps> = ({weather}) => {
   const classes = useStyles();
@@ -33,41 +40,35 @@ export const WeatherEntry:FC<weatherProps> = ({weather}) => {
   }
   
   return (
-    <Card>
-      <CardHeader
-        avatar = {(
-          weather.weather.map(d=>{
-            <Avatar
+    
+      <Card className = {classes.card}>
+        <CardHeader
+          avatar={
+            <Avatar 
               aria-label="recipe" 
-              src = {getIconUrl(d.icon)}
-              alt = {d.main}
-            >
+              className={classes.avatar}
+              src = {getIconUrl(weather.weather[0].icon)}
+            >    
             </Avatar>
-          }))
-        }
-        title = {new Date(weather.dt *1000).toTimeString()}
-      >
-      </CardHeader>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          <strong>{weather.main.temp}°C</strong>
-        </Typography>
-      </CardContent>
-    </Card>
-    // <div>
-    //   {new Date(weather.dt *1000).toTimeString()}
-    //   <div>
-    //   <strong>{weather.main.temp}°C</strong>
-    //   <div>({weather.main.temp_min}°C/{weather.main.temp_max}°C)</div>
-    //   </div>
-    //   <div>Humidity: {weather.main.humidity}%</div>
-    //   {
-    //     weather.weather.map(d=><div key = {d.id}>
-    //       <img src = {getIconUrl(d.icon)} alt = {d.main}/>
-    //       {d.main} {d.description}
-    //     </div>)
-    //   }
-    //   <div>Feels like: {weather.main.feels_like}°C</div>  
-    // </div>
+          }
+          title = {new Date(weather.dt *1000).toTimeString()}
+        >
+        </CardHeader>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            <strong>{weather.main.temp}°C</strong>
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            <strong>{weather.weather[0].description}</strong>
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary">
+          Feels like: {Math.ceil(weather.main.feels_like)}°C
+          </Typography>
+        </CardContent>
+      </Card>
   )
 }

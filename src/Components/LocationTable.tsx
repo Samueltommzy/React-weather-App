@@ -30,6 +30,9 @@ const useStyles = makeStyles((themes)=>({
   listStyle :{
     fontStyle :'bold',
     margin : '12px'
+  },
+  tableStyles:{
+    marginBottom: '9px'
   }
 }))
 export const  LocationTable:FC<LocationTableProps> = ({Locations,currentLocation,onSelect}) => {
@@ -39,7 +42,7 @@ export const  LocationTable:FC<LocationTableProps> = ({Locations,currentLocation
       <Typography variant = 'h5' className = {classes.listStyle} >
         Location List
       </Typography>
-      <TableContainer component = {Paper}>
+      <TableContainer component = {Paper} className = {classes.tableStyles}>
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
