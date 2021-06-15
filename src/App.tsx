@@ -57,13 +57,18 @@ function App() {
       setWarning(`This location data already exists`);
     }
     else if(locationList.length >= 4){
-      setWarning('You can only have a maximum of 4 Locations');
+      setWarning('You can only have a maximum of 4 Locations,kindly remove atleast 1 location');
     }
     else{
       setLocationList([...locationList,locationData]);
     } 
   }
 
+  const removeLoc = (locName:string) => {
+    const location = locationList.filter((locData)=>locData.name !== locName);
+    console.log(location,'loc');
+    setLocationList(location);
+  }
   return (
     <ThemeProvider theme = {theme}>
        <Paper >
@@ -80,10 +85,10 @@ function App() {
                 : null
               }
               {
-                warning ? <div className = {`alert alert-warning`}>{warning}</div>
+                warning ? <div className = {`alert alert-warning`} style = {{fontSize:15,textAlign:'center'}}>{warning}</div>
                 : null
               }
-           <LocationTable Locations = {locationList} currentLocation = {currLocation} onSelect = {(location)=>setCurrLocation(location)}/>
+           <LocationTable Locations = {locationList} currentLocation = {currLocation} onSelect = {(location)=>setCurrLocation(location)} onRemove = {removeLoc}/>
           </Grid>
           <Grid item sm = {4}/>
         </Grid>

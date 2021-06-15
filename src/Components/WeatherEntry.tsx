@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: grey[500],
+    // backgroundColor: grey[500],
   },
   card : {
     backgroundColor : lightBlue[500]
