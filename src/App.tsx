@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './Styles/WeatherSummary.css';
 import {LocationSearch} from './Components/LocationSearch';
@@ -12,7 +11,7 @@ import {Weather} from './Models/Weather';
 import { createMuiTheme, Grid, makeStyles, Paper, ThemeProvider} from '@material-ui/core';
 import bkgroundImg from './weather.jpg';
 import {Navbar} from './Components/Navbar';
-import { lightBlue, teal } from '@material-ui/core/colors';
+import { lightBlue } from '@material-ui/core/colors';
 const useStyles  = makeStyles({
   root:{
     backgroundImage: `url(${bkgroundImg})`,
@@ -68,6 +67,9 @@ function App() {
     const location = locationList.filter((locData)=>locData.name !== locName);
     console.log(location,'loc');
     setLocationList(location);
+    if(currLocation?.name === locName){
+      setCurrLocation(undefined);
+    }
   }
   return (
     <ThemeProvider theme = {theme}>

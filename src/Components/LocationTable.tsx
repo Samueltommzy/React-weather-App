@@ -50,9 +50,6 @@ const useStyles = makeStyles((themes)=>({
 }))
 export const  LocationTable:FC<LocationTableProps> = ({Locations,currentLocation,onSelect,onRemove}) => {
   const classes = useStyles();
-  // const handleRemoveLoc = () => {
-
-  // }
   return (
     <div>
       <Typography variant = 'h5' className = {classes.listStyle} >

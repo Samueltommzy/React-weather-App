@@ -1,5 +1,5 @@
 import { Button, Grid, makeStyles, TextField } from '@material-ui/core';
-import { AccountCircleOutlined,LocationOn } from '@material-ui/icons';
+import { LocationOn } from '@material-ui/icons';
 import React,{FC,useState,} from 'react'
 
 interface LocationSearchProp {

@@ -1,4 +1,4 @@
-import { AppBar, Grid, makeStyles, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core'
 import React, { FC } from 'react'
 
 const useStyles = makeStyles((theme) => ({

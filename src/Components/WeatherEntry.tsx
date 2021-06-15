@@ -1,5 +1,5 @@
-import { Avatar, Card, CardContent, CardHeader, Grid, makeStyles, Typography } from '@material-ui/core';
-import { grey, lightBlue, red } from '@material-ui/core/colors';
+import { Avatar, Card, CardContent, CardHeader, makeStyles, Typography } from '@material-ui/core';
+import { lightBlue } from '@material-ui/core/colors';
 import React, { FC } from 'react'
 import {Weather} from '../Models/Weather';
 import {getIconUrl} from '../Services/WeatherService';
@@ -51,12 +51,12 @@ export const WeatherEntry:FC<weatherProps> = ({weather}) => {
             >    
             </Avatar>
           }
-          title = {new Date(weather.dt *1000).toTimeString()}
+          title = {new Date(weather.dt *1000).toLocaleString()}
         >
         </CardHeader>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            <strong>{weather.main.temp}°C</strong>
+            <strong>{Math.ceil(weather.main.temp)}°C</strong>
           </Typography>
         </CardContent>
         <CardContent>
