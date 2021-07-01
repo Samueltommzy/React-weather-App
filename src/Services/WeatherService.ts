@@ -2,7 +2,7 @@ import {weatherLoc} from '../Models/WeatherLocation';
 import {Weather} from '../Models/Weather';
 
 const apiKey:string = process.env.REACT_APP_API_KEY as string;
-const apiUrl = 'http://api.openweathermap.org/data/2.5';
+const apiUrl = 'https://api.openweathermap.org/data/2.5';
 console.log(apiKey)
 // if(apiKey === undefined){
 //   throw new Error('API key not found');

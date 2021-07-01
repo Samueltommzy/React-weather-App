@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
+  searchButton:{
+    color: 'black'
+  }
 }));
 
 export const LocationSearch: FC<LocationSearchProp> = ({handleSearch}) => {
@@ -40,6 +43,7 @@ export const LocationSearch: FC<LocationSearchProp> = ({handleSearch}) => {
             color="primary" 
             disabled = {disableSearch}
             onClick = {updateLocations}
+            className = {classes.searchButton}
           >
             Add
           </Button>
