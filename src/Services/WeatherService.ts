@@ -39,6 +39,6 @@ export async function readWeatherForecast(locId:number):Promise<Weather[]|null>{
 }
 
 export function getIconUrl(iconId:string):string{
-  return `http://openweathermap.org/img/wn/${iconId}.png`;
+  return `https://openweathermap.org/img/wn/${iconId}.png`;
 }
 
